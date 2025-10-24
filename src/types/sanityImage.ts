@@ -1,28 +1,13 @@
-export interface Image {
+import { SanityImageSource } from "@sanity/image-url/lib/types/types"
+import { PortableTextBlock } from "next-sanity"
+
+export interface GalleryImage {
   _id: string
   _type: 'Image'
-  imgBinary: {
-    _type: 'image'
-    asset: {
-      _ref: string
-      _type: 'reference'
-    }
-    hotspot?: {
-      x: number
-      y: number
-      height: number
-      width: number
-    }
-    crop?: {
-      top: number
-      bottom: number
-      left: number
-      right: number
-    }
-  }
+  src: SanityImageSource
   auteur?: string
   oeuvre?: string
   date?: string // ISO datetime string
   lieu?: string
-  description?: any[] // Portable Text blocks
+  description?: PortableTextBlock[] // Portable Text blocks
 }

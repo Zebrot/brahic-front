@@ -1,4 +1,5 @@
 import { SanityImageSource } from "@sanity/image-url/lib/types/types"
+import {PortableTextBlock} from '@portabletext/types';
 
 export interface Project {
   _id: string
@@ -15,6 +16,6 @@ export interface Project {
   budget?: number
   mandat?: string
   equipe?: string[]
-  description?: any[] // Portable Text blocks
+  description?: PortableTextBlock[] // Portable Text blocks
   images: SanityImageSource[]
 }

@@ -1,7 +1,6 @@
 'use client'
 import { createContext, useContext, useState, Dispatch, SetStateAction } from 'react'
 import Image from 'next/image';
-import { urlFor } from '@/utils/urlFor';
 
 const BackgroundContext = createContext<{backgroundImg: string, setBackgroundImg: Dispatch<SetStateAction<string>>} | null>(null)
 
