@@ -10,7 +10,7 @@ export default function Sidebar() {
         window.scrollTo(0, 0)
     },[pathname,setSidebarContent])
     return (
-        <div className={`hidden ${pathname == '/Index' ? 'hidden' : 'lg:block'} w-[20%] sticky top-12 h-[94vh] px-1`}>
+        <div className={`hidden ${pathname == '/Portfolio' ? 'hidden' : 'lg:block'} w-[20%] sticky top-12 h-[94vh] px-1`}>
             <div className="grid grid-cols-[1fr_2fr] gap-3 max-h-full overflow-scroll no-scrollbar">
                 {sidebarContent.map((el,index)=>{
                     if(sidebarContent[index - 1] === '+'){
