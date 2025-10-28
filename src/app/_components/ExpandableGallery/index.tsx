@@ -9,9 +9,9 @@ import { PortableText } from "next-sanity";
 
 const ROW_HEIGHT = 400;
 const col_start_classes = ['col-start-1','col-start-2','col-start-3','col-start-4',]
-function getRowAndCol(index : number){
-    const row = Math.floor(index / 4);
-    const col = index % 4;
+function getRowAndCol(index : number, number_of_rows : number){
+    const row = Math.floor(index / number_of_rows);
+    const col = index % number_of_rows;
     return {row, col}
 }
 
@@ -52,11 +52,15 @@ export default function ExpandableGallery({images} : {images : GalleryImage[]}){
     }
 
     return (
-        <div className="no-scrollbar grid grid-cols-4 gap-[10px] overflow-y-auto h-screen" ref={elementRef}>
+        <div className="no-scrollbar grid grid-cols-3 xl:grid-cols-4 gap-[10px] overflow-y-auto h-screen" ref={elementRef}>
             {images.map((image, index)=> {
-                let {row, col} = getRowAndCol(index)
-                if(expandedIndex === index && col == 3)
-                    col = 2;
+                if(!elementRef.current)
+                    return null
+                const number_of_rows = elementRef.current.clientWidth >= 1024 ? 4 : 3; // 1024 because it is 80% of 1280
+                let {row, col} = getRowAndCol(index, number_of_rows)
+
+                if(expandedIndex === index && col == number_of_rows - 1)
+                    col = col - 1;
                 if(expandedIndex === index && row == visibleRows.lastVisibleRow)
                     row--;
 
