@@ -31,3 +31,6 @@
   margin: 0px !important;
   padding: none;
 }
+.prose p {
+  margin-bottom: 1rem;
+}
