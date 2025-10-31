@@ -82,7 +82,6 @@ export default function ProjectCard({project, index} : {project : Project, index
             </div>
         )}
     else {
-        console.log(index, colors[index])
 
         if(!project.images)
             return null
