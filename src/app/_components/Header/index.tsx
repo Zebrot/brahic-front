@@ -25,7 +25,7 @@ export default function Header() {
                 </div>
                 Brahic
             </Link>
-            <nav className="flex gap-1 lg:gap-8">
+            <nav className="flex gap-3 lg:gap-8">
                 <Link href={'/Portfolio'}>index</Link>
                 <Link className="hidden lg:inline" href={'/Gallery'}>iconographie</Link>
                 <Link href={'/Infos'}>infos</Link>

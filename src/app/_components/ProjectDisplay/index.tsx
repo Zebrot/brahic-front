@@ -6,13 +6,14 @@ import Image from "next/image"
 import { useSidebar } from "@/app/context/SidebarContext"
 import { useEffect, useState } from "react"
 import { ReactNode } from "react"
+import Carousel from "../Carousel"
 
 export default function ProjectDisplay({project} : {project : Project}) {
     const [isMobile, setIsMobile] = useState(false);
     const {setSidebarContent} = useSidebar();
     const [toDisplay, setToDisplay] = useState<ReactNode[]>([])
-
-    useEffect(() => {
+    const [displayText, setDisplayText] = useState<boolean>(false)
+    useEffect(() => { 
         setIsMobile(window.innerWidth < 1024);
     }, [setIsMobile]);
 
@@ -39,33 +40,38 @@ export default function ProjectDisplay({project} : {project : Project}) {
                 ...(project.surface ? ['surface', `${project.surface}m²`] : []),
                 ...(project.mandat ? ['mandat', project.mandat] : []),
                 ...(project.equipe ? ['équipe', project.equipe] : []),
-                ...(project.description ? 
-                    ['+', <PortableText key={'description'} value={project.description} /> ]
+                ...(project.description ?
+                    ['+', <PortableText key={project.name} value={project.description} />]
                     : []),
             ]))
         }
         
-    },[setToDisplay, setSidebarContent, project, isMobile])
-
+    },[setToDisplay, displayText, setDisplayText, setSidebarContent, project, isMobile])
 
     if(isMobile){
         return(
             <div>
-                <div className="h-60vh flex gap-5 overflow-x-scroll no-scrollbar">
+                <div className="h-[60vh] flex gap-5 overflow-x-scroll no-scrollbar">
                     {project.images.map((image, index)=> {
                         const imgUrl = urlFor(image)?.height(1200).width(800).url()
                         if(!imgUrl)
                             return false
                         return (
-                            <Image key={index} src={imgUrl} height={1200} width={800}  alt=""/>
+                            <Image key={index} alt="" src={imgUrl} unoptimized width={0} height={0} 
+                            style={{height:'100%', width:'auto', maxWidth:'85vw', objectFit:'cover', objectPosition:'center'}} />
                         )
                     })}
                 </div>
                 <h2>{project.name}</h2>
                 <ul className="flex flex-col gap-1 my-2">
-                    {toDisplay?.map((el,i)=><li key={i}>{el}</li>)}
+                    {toDisplay?.map((el,i)=>(
+                        <li key={i}>
+                            {el === '+' ? <button className='scale-150' onClick={()=>setDisplayText(!displayText)}>{displayText? '-' : '+'}</button> : el}
+                        </li>
+                    ))}
                 </ul>
-                <div className="prose">
+                <div aria-hidden={!displayText} className={`prose transition-opacity delay-10 duration-500  
+                    ${displayText ? 'opacity-100' : 'fixed opacity-0'}`}>
                         {Array.isArray(project.description) && <PortableText value={project.description} />}
                 </div>
             </div>
@@ -73,40 +79,12 @@ export default function ProjectDisplay({project} : {project : Project}) {
     }
     else {
         return(
-            <div className="flex h-screen overflow-hidden">
-                <div className="relative w-[50%] flex flex-col gap-2 overflow-y-auto no-scrollbar pr-2">
-                    {project.images.map((image, index)=> {
-                        const imgUrl = urlFor(image)?.height(2000).width(2000).url()
-                        if(!imgUrl)
-                            return null
-                        return(
-                            <div key={index} className="relative w-full h-[75vh] flex-none">
-                                <Image
-                                    className='object-cover' 
-                                    src={imgUrl} 
-                                    fill 
-                                    alt="" 
-                                />
-                            </div>
-                        )
-                    })}
+            <div className="flex gap-2 h-[94vh] overflow-hidden pr-2">
+                <div className="relative w-[50%]">
+                    <Carousel images={project.images} />
                 </div>
-                <div className="relative w-[50%] flex flex-col gap-2 overflow-y-auto no-scrollbar pr-2">
-                    {[...project.images].reverse().map((image, index)=> {
-                        const imgUrl = urlFor(image)?.height(2000).width(2000).url()
-                        if(!imgUrl)
-                            return null
-                        return(
-                            <div key={index} className="relative w-full h-[90vh] flex-none">
-                                <Image
-                                    className='object-cover' 
-                                    src={imgUrl}
-                                    fill 
-                                    alt="" 
-                                />
-                            </div>
-                        )
-                    })}
+                <div className="relative w-[50%] h-full">
+                    <Carousel images={[...project.images].reverse()} />
                 </div>
             </div>
         )

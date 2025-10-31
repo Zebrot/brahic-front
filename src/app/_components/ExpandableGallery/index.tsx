@@ -17,7 +17,6 @@ function getRowAndCol(index : number, number_of_rows : number){
 
 function getVisibleRows(scrollTop : number) {
   const firstVisibleRow = Math.floor((scrollTop + 150)  / ROW_HEIGHT);
-  console.log(firstVisibleRow)
   return { firstVisibleRow, lastVisibleRow : firstVisibleRow +1 };
 }
 
@@ -36,12 +35,14 @@ export default function ExpandableGallery({images} : {images : GalleryImage[]}){
                 ${image.oeuvre ? `auteur :${image.oeuvre}` : 'sans titre'} -
                 ${image.date ? `auteur :${image.date}` : 'date inconnue'} -
                 ${image.lieu ? `auteur :${image.lieu}` : ''}`,
-                '+', image.description ? <PortableText value={image.description} /> : ''
+                '+', 
+                image.description ? <PortableText value={image.description} /> : ''
             ]
             );
 
         if(!elementRef.current)
             return false
+
         setVisibleRows(getVisibleRows(elementRef.current.scrollTop))
 
         if(expandedIndex === index)
@@ -52,7 +53,7 @@ export default function ExpandableGallery({images} : {images : GalleryImage[]}){
     }
 
     return (
-        <div className="no-scrollbar grid grid-cols-3 xl:grid-cols-4 gap-[10px] overflow-y-auto h-screen" ref={elementRef}>
+        <div className="no-scrollbar grid grid-cols-3 xl:grid-cols-4 gap-2 overflow-y-auto h-screen" ref={elementRef}>
             {images.map((image, index)=> {
                 if(!elementRef.current)
                     return null
@@ -61,7 +62,7 @@ export default function ExpandableGallery({images} : {images : GalleryImage[]}){
 
                 if(expandedIndex === index && col == number_of_rows - 1)
                     col = col - 1;
-                if(expandedIndex === index && row == visibleRows.lastVisibleRow)
+                if(expandedIndex === index && row > visibleRows.firstVisibleRow)
                     row--;
 
                 row++;  // Grids are 1-indexed for some ungodly reason

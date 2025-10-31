@@ -13,15 +13,17 @@ export default async function Index() {
   const projects = await client.fetch<Project[]>(POSTS_QUERY, {}, options);
   return (
     <BackgroundProvider>
-      <div className="left-[20%] h-full w-[38%] absolute -z-1">
+      <div className="left-[20%] h-[93vh] w-[38%] absolute -z-1">
         <div className="min-h-full min-w-full w-auto">
           <Background/>
         </div>
       </div>
       <div className="flex flex-col">
-          {projects.map((project, index)=> (
-              <ProjectCard key={index} project={project} />
-          ))}
+          {projects.map((project, index)=> {
+            if(!project.images)
+              project.images = []
+              return <ProjectCard key={index} project={project} index={index} />
+        })}
       </div>   
     </BackgroundProvider>
   );

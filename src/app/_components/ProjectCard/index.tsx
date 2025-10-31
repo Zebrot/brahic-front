@@ -7,7 +7,24 @@ import { urlFor } from "@/utils/urlFor";
 import { useBackground } from "@/app/context/BackgroundContext";
 import { useState, useEffect } from "react";
 
-export default function ProjectCard({project} : {project : Project}) {
+const colors = [
+    'hover:text-blue-400',
+    'hover:text-green-400',
+    'hover:text-red-300',
+    'hover:text-yellow-300',
+    'hover:text-blue-200',
+    'hover:text-blue-800',
+    'hover:text-green-700',
+    'hover:text-red-100',
+    'hover:text-yellow-400',
+    'hover:text-blue-200',
+    'hover:text-blue-800',
+    'hover:text-green-700',
+    'hover:text-red-100',
+    'hover:text-yellow-400',
+    'hover:text-blue-200',]
+
+export default function ProjectCard({project, index} : {project : Project, index:number}) {
     const background = useBackground()
     const [isMobile, setIsMobile] = useState(false);
 
@@ -23,13 +40,16 @@ export default function ProjectCard({project} : {project : Project}) {
             <div className="overflow-x-scroll  no-scrollbar" >
                 <div className="h-fit w-fit flex gap-2">
                     {project.images.map((image, index)=> {
-                        const imgUrl = urlFor(image)?.width(280).height(350).url()
+                        const imgUrl = project.images[0] ? urlFor(project.images[0])?.width(800).height(1200).url() : undefined
                         if(!imgUrl)
                             return false
                         return (
-                            <div key={index} className="w-[280px] h-[400px] relative">
+                            <div key={index} className="h-[400px] relative">
                                 <Link href={`/project/${project.code}`}>
-                                    <Image src={imgUrl} alt={''} width={280} height={350}/>
+                                <div className="relative img-wrapper h-[350px] overflow-hidden">
+                                    <Image src={imgUrl} unoptimized alt="" width={0} height={0} 
+                                    style={{height: '100%', width:'auto', maxWidth:'none', objectFit:'cover', objectPosition:'center'}}/>
+                                </div>
                                     <span>{toDisplay[index]}</span>
                                 </Link>
                             </div>
@@ -39,9 +59,14 @@ export default function ProjectCard({project} : {project : Project}) {
             </div>
         )}
     else {
-        const imgUrl = urlFor(project.images[0])?.width(800).height(1200).url()
+        console.log(index, colors[index])
+
+        if(!project.images)
+            return null
+        const imgUrl = project.images[0] ? urlFor(project.images[0])?.width(800).height(1200).url() : ''
         return(
-            <Link className='flex w-screen hover:bg-black/30 hover:text-white px-1' href={`/project/${project.code}`} onMouseOver={()=>background.setBackgroundImg(imgUrl ?? '')}>
+            <Link className={`${colors[index]}
+            cursor-default flex w-screen group  px-1`} href={`/project/${project.code}`} onMouseOver={()=>background.setBackgroundImg(imgUrl ?? '')}>
                 <div className="w-[20%]">{project.code}</div>
                 <div className="flex w-[40%]">
                     <div className="w-[50%]">{project.name}</div>

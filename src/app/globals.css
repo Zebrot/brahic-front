@@ -18,9 +18,11 @@
     }
   }
 
-* {
-  font-weight: 500 !important;
-  font-size: 12px;
+@layer base {
+  body {
+    @apply text-[14px];
+    @apply font-[500]
+  }
 }
  h2 {
   font-size: larger;
