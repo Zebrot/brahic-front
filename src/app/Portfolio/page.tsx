@@ -14,7 +14,7 @@ export default async function Index() {
   return (
     <BackgroundProvider>
       <div className="left-[20%] h-[93vh] w-[38%] absolute -z-1">
-        <div className="min-h-full min-w-full w-auto">
+        <div className="h-full min-w-full w-auto">
           <Background/>
         </div>
       </div>

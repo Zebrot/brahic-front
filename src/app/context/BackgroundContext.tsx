@@ -26,6 +26,6 @@ export function Background(){
     if(!background.backgroundImg)
         return false
     return (
-        <Image src={background.backgroundImg} fill alt='' className='min-h-full'/>
+        <Image src={background.backgroundImg} width={0} height={0} unoptimized alt='' style={{objectFit:'cover', width:'100%', height:'auto', maxHeight:'100%'}}/>
     )
 }

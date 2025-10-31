@@ -23,15 +23,15 @@ export default function Carousel({images} : CarouselProps){
     }
 
     return(
-        <div className="w-full h-full relative overflow-hidden" >
-            <div className="absolute flex h-full justify-between w-full z-2 text-xl text-white px-2">
+        <div className="select-none w-full h-full relative overflow-hidden" >
+            <div className={`${images.length <= 1 ? 'hidden' : ''} absolute flex h-full justify-between w-full z-2 text-xl text-white px-2`}>
                 <div onClick={()=>handleClick(-1)} className="group h-full w-[40%] flex items-center">
-                    <button className="flex justify-center items-center rounded-full p-4 bg-black/20 flex items-center transition duration-400 opacity-0 group-hover:opacity-100">
+                    <button className="select-none flex justify-center items-center rounded-full  px-3 pb-3 pt-2 bg-black/20 flex items-center transition duration-400 opacity-0 group-hover:opacity-100">
                         ←
                     </button>
                 </div>
                 <div onClick={()=>handleClick(1)} className="group h-full w-[40%] flex items-center justify-end">
-                    <button className="flex justify-center items-center rounded-full p-4 bg-black/20 flex items-center transition duration-400 opacity-0 group-hover:opacity-100">
+                    <button className="select-none flex justify-center items-center rounded-full px-3 pb-3 pt-2 bg-black/20 flex items-center transition duration-400 opacity-0 group-hover:opacity-100">
                         →
                     </button>
 
