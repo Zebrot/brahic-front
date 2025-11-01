@@ -49,7 +49,6 @@ export default function Carousel({images} : CarouselProps){
                                 width={0}
                                 height={0} 
                                 loading="eager"
-                                unoptimized
                                 style={{objectFit:'cover', width:'100%', height:'auto'}}
                                 alt="" 
                             />

@@ -63,14 +63,14 @@ export default function ProjectCard({project, index} : {project : Project, index
             <div className="overflow-x-scroll  no-scrollbar" >
                 <div className="h-fit w-fit flex gap-2">
                     {project.images.map((image, index)=> {
-                        const imgUrl = project.images[0] ? urlFor(project.images[0])?.width(800).height(1200).url() : undefined
+                        const imgUrl = project.images[0] ? urlFor(project.images[0])?.width(700).height(800).url() : undefined
                         if(!imgUrl)
                             return false
                         return (
                             <div key={index} className="h-[400px] relative">
                                 <Link href={`/project/${project.code}`}>
                                 <div className="relative img-wrapper h-[350px] overflow-hidden">
-                                    <Image src={imgUrl} unoptimized alt="" width={0} height={0} 
+                                    <Image src={imgUrl} alt="" width={800} height={350}
                                     style={{height: '100%', width:'auto', maxWidth:'none', objectFit:'cover', objectPosition:'center'}}/>
                                 </div>
                                     <span>{toDisplay[index]}</span>
