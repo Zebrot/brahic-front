@@ -26,7 +26,7 @@ export function Background(){
     if(!background.backgroundImg)
         return false
     return (
-        <div className='w-full overflow-hidden h-94vh'>
+        <div className='w-full overflow-hidden h-[94vh]'>
             <Image 
                 src={background.backgroundImg} 
                 width={1200} 
