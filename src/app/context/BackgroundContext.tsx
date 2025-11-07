@@ -16,7 +16,7 @@ export function BackgroundProvider({children} : {children : React.ReactNode}){
 export function useBackground(){
     const context = useContext(BackgroundContext);
     if (!context) {
-        throw new Error("useSidebar must be used within a SidebarProvider");
+        throw new Error("No BackgroundProvider available");
     }
     return context;
 }
@@ -26,6 +26,13 @@ export function Background(){
     if(!background.backgroundImg)
         return false
     return (
-        <Image src={background.backgroundImg} width={0} height={0} unoptimized alt='' style={{objectFit:'cover', width:'100%', height:'auto', maxHeight:'100%'}}/>
+        <div className='w-full overflow-hidden h-94vh'>
+            <Image 
+                src={background.backgroundImg} 
+                width={1200} 
+                height={1200} 
+                alt='' 
+                style={{objectFit:'contain', width:'100%', height:'auto', maxHeight:'none'}}/>
+        </div>
     )
 }

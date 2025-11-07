@@ -14,7 +14,7 @@ export default function Header() {
     }, [pathname])
     return (
         <div className="flex justify-between lg:px-0 px-3 lg:h-12 lg:pb-3 h-10 items-center w-screen scale-100 lg:scale-100 sticky top-0 lg:w-screen  lg:pr-2 bg-white z-10">
-            <Link href={'/'} className="relative flex gap-1 lg:gap-0">
+            <Link href={'/'} className="relative flex gap-1 lg:gap-0 font-semibold">
                 <div className='lg:w-[20vw] relative'>
                     <span className={`
                         ${wide ? 'lg:translate-x-[16vw]':'lg:translate-x-1'}

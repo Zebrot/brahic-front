@@ -25,14 +25,14 @@ export default function Carousel({images} : CarouselProps){
     return(
         <div className="select-none w-full h-full relative overflow-hidden" >
             <div className={`${images.length <= 1 ? 'hidden' : ''} absolute flex h-full justify-between w-full z-2 text-xl text-white px-2`}>
-                <div onClick={()=>handleClick(-1)} className="group h-full w-[40%] flex items-center">
-                    <button className="select-none flex justify-center items-center rounded-full  px-3 pb-3 pt-2 bg-black/20 flex items-center transition duration-400 opacity-0 group-hover:opacity-100">
-                        ←
+                <div onClick={()=>handleClick(-1)} className="group h-full w-[40%] flex items-center px-3">
+                    <button className="select-none flex justify-center transition duration-400 opacity-0 group-hover:opacity-100">
+                        <Image src='/images/chevron_left.png' alt='' width={15} height={15} />
                     </button>
                 </div>
-                <div onClick={()=>handleClick(1)} className="group h-full w-[40%] flex items-center justify-end">
-                    <button className="select-none flex justify-center items-center rounded-full px-3 pb-3 pt-2 bg-black/20 flex items-center transition duration-400 opacity-0 group-hover:opacity-100">
-                        →
+                <div onClick={()=>handleClick(1)} className="group h-full w-[40%] flex items-center px-3 justify-end">
+                    <button className="select-none flex justify-center transition duration-400 opacity-0 group-hover:opacity-100">
+                        <Image src='/images/chevron_right.png' alt='' width={15} height={15} />
                     </button>
 
                 </div>
@@ -46,9 +46,9 @@ export default function Carousel({images} : CarouselProps){
                         <div key={index} className={`absolute flex  w-full h-full flex-none ${index === carouselIndex ? 'z-1' : '-z-1'}`}>
                             <Image
                                 src={imgUrl} 
-                                width={0}
-                                height={0} 
-                                loading="eager"
+                                width={2000}
+                                height={2000}
+                                loading={`eager`}
                                 style={{objectFit:'cover', width:'100%', height:'auto'}}
                                 alt="" 
                             />

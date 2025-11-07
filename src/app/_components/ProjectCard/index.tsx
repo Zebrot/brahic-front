@@ -6,47 +6,9 @@ import Link from "next/link";
 import { urlFor } from "@/utils/urlFor";
 import { useBackground } from "@/app/context/BackgroundContext";
 import { useState, useEffect } from "react";
-
-const colors = [
-    'hover:text-blue-400',
-    'hover:text-green-400',
-    'hover:text-red-300',
-    'hover:text-yellow-300',
-    'hover:text-blue-200',
-    'hover:text-blue-800',
-    'hover:text-green-700',
-    'hover:text-red-100',
-    'hover:text-yellow-400',
-    'hover:text-blue-200',
-    'hover:text-blue-800',
-    'hover:text-green-700',
-    'hover:text-red-100',
-    'hover:text-yellow-400',
-    'hover:text-blue-200',
+const grey_Blue = [
+    'hover:text-blue-200', 
 ]
-const colrs = [
-    'hover:text-blue-400',
-    'hover:text-red-400'
-]
-
-    const bg_colors = [
-    'hover:bg-blue-400/80 hover:text-white',
-    'hover:bg-green-400/80 hover:text-white',
-    'hover:bg-red-300/80 hover:text-white',
-    'hover:bg-yellow-300/80 hover:text-white',
-    'hover:bg-blue-200/80 hover:text-white',
-    'hover:bg-blue-800/80 hover:text-white',
-    'hover:bg-green-700/80 hover:text-white',
-    'hover:bg-red-100/80 hover:text-white',
-    'hover:bg-yellow-400/80 hover:text-white',
-    'hover:bg-blue-200/80 hover:text-white',
-    'hover:bg-blue-800/80 hover:text-white',
-    'hover:bg-green-700/80 hover:text-white',
-    'hover:bg-red-100/80 hover:text-white',
-    'hover:bg-yellow-400/80 hover:text-white',
-    'hover:bg-blue-200/80 hover:text-white',
-]
-
 export default function ProjectCard({project, index} : {project : Project, index:number}) {
     const background = useBackground()
     const [isMobile, setIsMobile] = useState(false);
@@ -85,10 +47,11 @@ export default function ProjectCard({project, index} : {project : Project, index
 
         if(!project.images)
             return null
-        const imgUrl = project.images[0] ? urlFor(project.images[0])?.width(800).height(1200).url() : ''
+        const imgUrl = project.images[0] ? urlFor(project.images[0])?.url() : ''
         return(
-            <Link className={`${index > 5 ? bg_colors[index % bg_colors.length] : colors[index % colors.length] }
-            cursor-default flex w-screen group  px-1`} href={`/project/${project.code}`} onMouseOver={()=>background.setBackgroundImg(imgUrl ?? '')}>
+            <Link className={`${grey_Blue[index % grey_Blue.length] }
+            cursor-default flex w-screen group  px-1`} href={`/project/${project.code}`} 
+            onMouseOver={()=>background.setBackgroundImg(imgUrl ?? '')}>
                 <div className="w-[20%]">{project.code}</div>
                 <div className="flex w-[40%]">
                     <div className="w-[50%]">{project.name}</div>

@@ -29,20 +29,19 @@ export default function ExpandableGallery({images} : {images : GalleryImage[]}){
     const Sidebar = useSidebar();
 
     function handleClick(index : number, image : GalleryImage){
+        if(!elementRef.current)
+            return false
+        
         Sidebar.setSidebarContent(
             [`
-                ${image.auteur ? `auteur :${image.auteur}` : 'auteur inconnu'} -
+                ${image.auteur ? `${image.auteur}` : 'auteur inconnu'} -
                 ${image.oeuvre ? `auteur :${image.oeuvre}` : 'sans titre'} -
                 ${image.date ? `auteur :${image.date}` : 'date inconnue'} -
                 ${image.lieu ? `auteur :${image.lieu}` : ''}`,
                 '+', 
                 image.description ? <PortableText value={image.description} /> : ''
             ]
-            );
-
-        if(!elementRef.current)
-            return false
-
+        );
         setVisibleRows(getVisibleRows(elementRef.current.scrollTop))
 
         if(expandedIndex === index)
@@ -50,6 +49,26 @@ export default function ExpandableGallery({images} : {images : GalleryImage[]}){
         else 
             setExpandedIndex(index);
 
+    }
+
+    function handleHover(image? : GalleryImage) {
+        if(expandedIndex >= 0)
+            return null
+
+        if(!image){
+            Sidebar.setSidebarContent([])
+            return null
+        }
+        Sidebar.setSidebarContent(
+            [`
+                ${image.auteur ? `${image.auteur}` : 'auteur inconnu'} -
+                ${image.oeuvre ? `auteur :${image.oeuvre}` : 'sans titre'} -
+                ${image.date ? `auteur :${image.date}` : 'date inconnue'} -
+                ${image.lieu ? `auteur :${image.lieu}` : ''}`,
+                '+', 
+                image.description ? <PortableText value={image.description} /> : ''
+            ]
+        );
     }
 
     return (
@@ -72,10 +91,13 @@ export default function ExpandableGallery({images} : {images : GalleryImage[]}){
                 if(!imgUrl)
                     return null
                 return (
-                    <div onClick={()=>handleClick(index,image)} 
+                    <div 
+                        onClick={()=>handleClick(index, image)} 
+                        onMouseOver={()=>handleHover(image)}
+                        onMouseOut={()=>handleHover()}
                         key={index} 
                         style={{ gridRowStart:  row }} 
-                        className={`hover:scale-101 transition duration-200 relative min-h-[350px] ${expandedIndex === index ? 'col-span-2 row-span-2 z-2' : ' '} ${colStyle}`}
+                        className={`${expandedIndex < 0 && 'hover:scale-101 transition duration-200'} relative min-h-[350px] ${expandedIndex === index ? 'col-span-2 row-span-2 z-2' : ' '} ${colStyle}`}
                     >
                         <Image
                             src = {imgUrl}

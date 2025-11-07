@@ -5,7 +5,7 @@ import { BackgroundProvider, Background } from "../context/BackgroundContext";
 
 const POSTS_QUERY = `*[
   _type == "Project"
-]|order(publishedAt desc)[0...12]`;
+]|order(publishedAt desc)`;
 const options = { next: { revalidate: 30 } };
 
 
