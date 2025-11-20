@@ -40,7 +40,10 @@ export default function Carousel({images} : CarouselProps){
             </div>
             <div className="h-full">
                 {images.map((image, index)=> {
-                    const imgUrl = urlFor(image)?.url()
+                    const imgUrl = urlFor(image)?.
+                        auto("format")
+                        .url()
+
                     if(!imgUrl)
                         return null
                     return(
