@@ -7,7 +7,7 @@ import { urlFor } from "@/utils/urlFor";
 import { useBackground } from "@/app/context/BackgroundContext";
 import { useState, useEffect } from "react";
 const grey_Blue = [
-    'hover:text-blue-200', 
+    'hover:text-gray-200', 
 ]
 export default function ProjectCard({project, index} : {project : Project, index:number}) {
     const background = useBackground()

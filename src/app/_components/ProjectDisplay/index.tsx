@@ -51,7 +51,7 @@ export default function ProjectDisplay({project} : {project : Project}) {
     if(isMobile){
         return(
             <div>
-                <div className="h-[60vh] flex gap-5 overflow-x-scroll no-scrollbar">
+                <div className="h-[60vh] flex gap-2 overflow-x-scroll no-scrollbar">
                     {project.images.map((image, index)=> {
                         const imgUrl = urlFor(image)?.height(1200).width(800).url()
                         if(!imgUrl)

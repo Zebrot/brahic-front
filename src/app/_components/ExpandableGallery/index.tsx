@@ -7,7 +7,7 @@ import { urlFor } from "@/utils/urlFor";
 import { useSidebar } from "@/app/context/SidebarContext";
 import { PortableText } from "next-sanity";
 
-const ROW_HEIGHT = 400;
+const ROW_HEIGHT = 250;
 const col_start_classes = ['col-start-1','col-start-2','col-start-3','col-start-4',]
 function getRowAndCol(index : number, number_of_rows : number){
     const row = Math.floor(index / number_of_rows);
@@ -87,7 +87,7 @@ export default function ExpandableGallery({images} : {images : GalleryImage[]}){
                 row++;  // Grids are 1-indexed for some ungodly reason
                 const colStyle = col_start_classes[col];
 
-                const imgUrl = urlFor(image.src)?.width(2000).height(2000).url()
+                const imgUrl = urlFor(image.src)?.height(1000).width(1000).url()
                 if(!imgUrl)
                     return null
                 return (
@@ -96,12 +96,13 @@ export default function ExpandableGallery({images} : {images : GalleryImage[]}){
                         onMouseOver={()=>handleHover(image)}
                         onMouseOut={()=>handleHover()}
                         key={index} 
-                        style={{ gridRowStart:  row }} 
-                        className={`${expandedIndex < 0 && 'hover:scale-101 transition duration-200'} relative min-h-[350px] ${expandedIndex === index ? 'col-span-2 row-span-2 z-2' : ' '} ${colStyle}`}
+                        style={{ gridRowStart:  row}}
+                        className={`hover:opacity-100 transition duration-200 min-w-full aspect-square relative ${expandedIndex === index ? 'col-span-2 row-span-2 z-2 opacity-100' : 'opacity-90'} ${colStyle}`}
                     >
                         <Image
                             src = {imgUrl}
                             fill
+                            style={{objectFit:'cover', minWidth: '100%'}}
                             alt=""
                         />
                     </div>

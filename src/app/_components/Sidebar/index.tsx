@@ -10,9 +10,10 @@ export default function Sidebar() {
         setSidebarContent(['']);
         window.scrollTo(0, 0)
     },[pathname,setSidebarContent])
+
     return (
         <div className={`hidden ${pathname == '/Portfolio' ? 'hidden' : 'lg:block'} w-[20%] sticky top-12 h-[94vh] px-1`}>
-            <div className="grid grid-cols-[1fr_2fr] gap-3 max-h-full overflow-scroll no-scrollbar">
+            <div className="grid grid-cols-[1fr_2fr] max-h-full overflow-scroll no-scrollbar">
                 {sidebarContent.map((el,index)=>{
                     if(el === '+'){
                         return (
@@ -23,7 +24,7 @@ export default function Sidebar() {
                     }
                     if(sidebarContent[index - 1] === '+'){
                         return (
-                        <div key={index} aria-hidden={!isOpen} className={`prose overflow-hidden prose transition-opacity delay-10 duration-500
+                        <div key={index} aria-hidden={!isOpen} className={`scroll-smooth prose overflow-hidden prose transition-opacity delay-10 duration-500
                             ${isOpen ? 'opacity-100 max-h-10000' : 'max-h-0 opacity-0'}`}>
                                 {el}
                         </div>
