@@ -4,8 +4,11 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --grey: #BBC2C9;
 }
-
+@theme inline {
+  --color-grey : var(--grey)
+}
 @layer utilities {
       /* Hide scrollbar for Chrome, Safari and Opera */
       .no-scrollbar::-webkit-scrollbar {

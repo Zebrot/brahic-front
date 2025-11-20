@@ -6,8 +6,8 @@ import Link from "next/link";
 import { urlFor } from "@/utils/urlFor";
 import { useBackground } from "@/app/context/BackgroundContext";
 import { useState, useEffect } from "react";
-const grey_Blue = [
-    'hover:text-gray-200', 
+const   grey = [
+    'hover:text-grey',
 ]
 export default function ProjectCard({project, index} : {project : Project, index:number}) {
     const background = useBackground()
