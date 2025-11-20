@@ -44,7 +44,11 @@ export default function ProjectCard({project, index} : {project : Project, index
 
         if(!project.images)
             return null
-        const imgUrl = project.images[0] ? urlFor(project.images[0])?.url() : ''
+        const imgUrl = project.images[0] ? 
+            urlFor(project.images[0])?.
+                auto("format").
+                url() 
+            : '' ;
         return(
             <Link className={`hover:text-grey
             cursor-default flex w-screen group  px-1`} href={`/project/${project.code}`} 
