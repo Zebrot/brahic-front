@@ -6,9 +6,6 @@ import Link from "next/link";
 import { urlFor } from "@/utils/urlFor";
 import { useBackground } from "@/app/context/BackgroundContext";
 import { useState, useEffect } from "react";
-const   grey = [
-    'hover:text-grey',
-]
 export default function ProjectCard({project, index} : {project : Project, index:number}) {
     const background = useBackground()
     const [isMobile, setIsMobile] = useState(false);
@@ -49,7 +46,7 @@ export default function ProjectCard({project, index} : {project : Project, index
             return null
         const imgUrl = project.images[0] ? urlFor(project.images[0])?.url() : ''
         return(
-            <Link className={`${grey_Blue[index % grey_Blue.length] }
+            <Link className={`hover:text-grey
             cursor-default flex w-screen group  px-1`} href={`/project/${project.code}`} 
             onMouseOver={()=>background.setBackgroundImg(imgUrl ?? '')}>
                 <div className="w-[20%]">{project.code}</div>
