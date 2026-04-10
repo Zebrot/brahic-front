@@ -5,9 +5,6 @@ export interface GalleryImage {
   _id: string
   _type: 'Image'
   src: SanityImageSource
-  auteur?: string
-  oeuvre?: string
-  date?: string // ISO datetime string
-  lieu?: string
+  infos?: string
   description?: PortableTextBlock[] // Portable Text blocks
 }

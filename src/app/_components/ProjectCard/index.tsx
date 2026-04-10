@@ -6,6 +6,7 @@ import Link from "next/link";
 import { urlFor } from "@/utils/urlFor";
 import { useBackground } from "@/app/context/BackgroundContext";
 import { useState, useEffect } from "react";
+
 export default function ProjectCard({project, index} : {project : Project, index:number}) {
     const background = useBackground()
     const [isMobile, setIsMobile] = useState(false);
@@ -22,12 +23,12 @@ export default function ProjectCard({project, index} : {project : Project, index
             <div className="overflow-x-scroll  no-scrollbar" >
                 <div className="h-fit w-fit flex gap-2">
                     {project.images.map((image, index)=> {
-                        const imgUrl = project.images[0] ? urlFor(project.images[0])?.width(700).height(800).url() : undefined
+                        const imgUrl = image ? urlFor(image)?.width(700).height(800).url() : undefined
                         if(!imgUrl)
                             return false
                         return (
                             <div key={index} className="h-[400px] relative">
-                                <Link href={`/project/${project.code}`}>
+                                <Link href={`/project/${project._id}`}>
                                 <div className="relative img-wrapper h-[350px] overflow-hidden">
                                     <Image src={imgUrl} alt="" width={800} height={350}
                                     style={{height: '100%', width:'auto', maxWidth:'none', objectFit:'cover', objectPosition:'center'}}/>
@@ -51,7 +52,7 @@ export default function ProjectCard({project, index} : {project : Project, index
             : '' ;
         return(
             <Link className={`hover:text-grey
-            cursor-default flex w-screen group  px-1`} href={`/project/${project.code}`} 
+            cursor-default flex w-screen group  px-1`} href={`/project/${project._id}`} 
             onMouseOver={()=>background.setBackgroundImg(imgUrl ?? '')}>
                 <div className="w-[20%]">{project.code}</div>
                 <div className="flex w-[40%]">

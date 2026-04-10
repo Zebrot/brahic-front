@@ -18,4 +18,5 @@ export interface Project {
   equipe?: string[]
   description?: PortableTextBlock[] // Portable Text blocks
   images: SanityImageSource[]
+  rightImages?: SanityImageSource[]
 }

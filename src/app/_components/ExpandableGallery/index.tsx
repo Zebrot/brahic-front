@@ -34,10 +34,7 @@ export default function ExpandableGallery({images} : {images : GalleryImage[]}){
         
         Sidebar.setSidebarContent(
             [`
-                ${image.auteur ? `${image.auteur}` : 'auteur inconnu'} -
-                ${image.oeuvre ? `auteur :${image.oeuvre}` : 'sans titre'} -
-                ${image.date ? `auteur :${image.date}` : 'date inconnue'} -
-                ${image.lieu ? `auteur :${image.lieu}` : ''}`,
+                ${image.infos ? `${image.infos}` : ''}`,
                 '+', 
                 image.description ? <PortableText value={image.description} /> : ''
             ]
@@ -61,10 +58,7 @@ export default function ExpandableGallery({images} : {images : GalleryImage[]}){
         }
         Sidebar.setSidebarContent(
             [`
-                ${image.auteur ? `${image.auteur}` : 'auteur inconnu'} -
-                ${image.oeuvre ? `auteur :${image.oeuvre}` : 'sans titre'} -
-                ${image.date ? `auteur :${image.date}` : 'date inconnue'} -
-                ${image.lieu ? `auteur :${image.lieu}` : ''}`,
+                ${image.infos ? `${image.infos}` : ''}`,
                 '+', 
                 image.description ? <PortableText value={image.description} /> : ''
             ]

@@ -22,6 +22,7 @@ export default async function Index() {
           {projects.map((project, index)=> {
             if(!project.images)
               project.images = []
+            console.log(project)
               return <ProjectCard key={index} project={project} index={index} />
         })}
       </div>   

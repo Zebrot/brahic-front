@@ -6,7 +6,7 @@ import { urlFor } from "@/utils/urlFor";
 const POSTS_QUERY = `*[
   _type == "homepageImages"
 ][0]`;
-const options = { next: { revalidate: 30 } };
+const options = { next: { revalidate: 20 } };
 
 export default async function Home() {
   const {desktopImages , mobileImages} = await client.fetch<HomepageImages>(POSTS_QUERY, {}, options);

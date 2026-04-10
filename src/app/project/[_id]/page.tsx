@@ -4,16 +4,16 @@ import ProjectDisplay from "@/app/_components/ProjectDisplay";
 
 const PROJECTS_QUERY = `*[
   _type == "Project"
-][0...12]`;
+]{ _id }`;
 
-const SINGLE_QUERY = `*[_type == "Project" && code == $code][0]`;
+const SINGLE_QUERY = `*[_type == "Project" && _id == $_id][0]`;
 const options = { next: { revalidate: 30 } };
 
 
 export async function generateStaticParams() {
-  const projectCodes = await client.fetch<Project[]>(PROJECTS_QUERY);
-  return projectCodes.map((project) => (
-    {code : project.code}
+  const projectIDs = await client.fetch<Project[]>(PROJECTS_QUERY);
+  return projectIDs.map((project) => (
+    {_id : project._id}
   ))
 }
 
@@ -21,11 +21,11 @@ export async function generateStaticParams() {
 export default async function Single({
   params
 }: {
-  params: Promise<{ code : string }>,
+  params: Promise<{ _id : string }>,
 }) {
     const project = await client.fetch<Project>(SINGLE_QUERY, await params, options);
     if(!project)
-        return false;
+        return <p className="ml-15 mt-15 text-l">Pas de projet à cette adresse...</p>;
     return (
         <ProjectDisplay project={project}/>
     )

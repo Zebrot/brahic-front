@@ -39,7 +39,7 @@ export default function ProjectDisplay({project} : {project : Project}) {
                 ...(project.client ? ['client', project.client] : []),
                 ...(project.surface ? ['surface', `${project.surface}m²`] : []),
                 ...(project.mandat ? ['mandat', project.mandat] : []),
-                ...(project.equipe ? ['équipe', project.equipe] : []),
+                ...(project.equipe ? ['équipe', project.equipe.join('\n')] : []),
                 ...(project.description ?
                     ['+', <PortableText key={project.name} value={project.description} />]
                     : []),
@@ -78,13 +78,14 @@ export default function ProjectDisplay({project} : {project : Project}) {
         )
     }
     else {
+        const rightImages = project.rightImages ? project.rightImages : [...project.images].reverse();
         return(
             <div className="flex gap-2 h-[94vh] overflow-hidden pr-2">
                 <div className="relative w-[50%]">
                     <Carousel images={project.images} />
                 </div>
                 <div className="relative w-[50%] h-full">
-                    <Carousel images={[...project.images].reverse()} />
+                    <Carousel images={rightImages} />
                 </div>
             </div>
         )
